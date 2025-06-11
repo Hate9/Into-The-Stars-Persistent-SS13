@@ -182,31 +182,6 @@ var/list/point_source_descriptions = list(
 
 /datum/export_order/static
 
-/datum/export_order/static/fill(var/obj/structure/closet/crate)
-	var/filled = 0
-	var/total = 0
-	var/list/filling = list()
-	for(var/obj/A in crate.contents)
-		if(istype(A, /obj/item/weapon/paper/export))
-			filling |= A
-			continue
-		if(!istype(A, typepath) && A.name != looking_name)
-			message_admins("fill failed due to invalid object [A.name]")
-			return 0
-		filling |= A
-		total += A.export_value
-		filled++
-
-	if(filled)
-		crate.loc = null
-		playsound(crate.loc,'sound/effects/teleport.ogg',40,1)
-		qdel(crate)
-		. = total
-
-
-
-
-
 /datum/export_order/stack
 
 /datum/export_order/stack/fill(var/obj/structure/closet/crate)
